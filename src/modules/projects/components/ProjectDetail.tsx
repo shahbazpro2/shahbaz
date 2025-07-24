@@ -26,7 +26,11 @@ const ProjectDetail = ({
           <div className='flex flex-wrap items-center gap-3'>
             {stacksArray?.map((stack: string, index: number) => (
               <div key={index}>
-                <Tooltip title={stack}>{STACKS[stack]}</Tooltip>
+                {STACKS[stack as keyof typeof STACKS] && (
+                  <Tooltip title={stack}>
+                    {STACKS[stack as keyof typeof STACKS]}
+                  </Tooltip>
+                )}
               </div>
             ))}
           </div>

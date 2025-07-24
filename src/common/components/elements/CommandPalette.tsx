@@ -16,7 +16,6 @@ import {
   SOCIAL_MEDIA,
 } from '@/common/constant/menu';
 import { CommandPaletteContext } from '@/common/context/CommandPaletteContext';
-import useIsMobile from '@/common/hooks/useIsMobile';
 import { MenuItemProps } from '@/common/types/menu';
 
 interface MenuOptionItemProps extends MenuItemProps {
@@ -34,7 +33,6 @@ const CommandPalette = () => {
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
   const router = useRouter();
-  const isMobile = useIsMobile();
   const { isOpen, setIsOpen } = useContext(CommandPaletteContext);
   const { resolvedTheme, setTheme } = useTheme();
   const queryDebounce = useDebounce(query, 500);
@@ -237,7 +235,7 @@ const CommandPalette = () => {
                             )
                           }
                         >
-                          {({ selected, active }) => (
+                          {({ selected }) => (
                             <>
                               <div className='flex items-center gap-3'>
                                 <div className='flex items-center gap-2'>

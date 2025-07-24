@@ -33,7 +33,11 @@ const LearnSubContentItem = ({
               </div>
             </Tooltip>
           )}
-          {language && <Tooltip title={language}>{STACKS[language]}</Tooltip>}
+          {language && STACKS[language as keyof typeof STACKS] && (
+            <Tooltip title={language}>
+              {STACKS[language as keyof typeof STACKS]}
+            </Tooltip>
+          )}
         </div>
       </Card>
     </Link>

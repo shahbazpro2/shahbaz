@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 import Container from '@/common/components/elements/Container';
 import PageHeading from '@/common/components/elements/PageHeading';
-import prisma from '@/common/libs/prisma';
 import { ProjectItemProps } from '@/common/types/projects';
 import Projects from '@/modules/projects';
 
@@ -40,20 +39,39 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
 export default ProjectsPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await prisma.projects.findMany({
-    orderBy: [
-      {
-        is_featured: 'desc',
-      },
-      {
-        updated_at: 'desc',
-      },
-    ],
-  });
+  // Temporarily disabled database connection for build
+  // const response = await prisma.projects.findMany({
+  //   orderBy: [
+  //     {
+  //       is_featured: 'desc',
+  //     },
+  //     {
+  //       updated_at: 'desc',
+  //     },
+  //   ],
+  // });
+
+  // Mock data for build
+  const mockProjects = [
+    {
+      id: 1,
+      title: 'Sample Project',
+      slug: 'sample-project',
+      description: 'This is a sample project for demonstration purposes.',
+      image: '/images/placeholder.png',
+      link_demo: 'https://example.com',
+      link_github: 'https://github.com/example',
+      stacks: '["React", "TypeScript", "Next.js"]',
+      is_show: true,
+      updated_at: new Date().toISOString(),
+      content: null,
+      is_featured: true,
+    },
+  ];
 
   return {
     props: {
-      projects: JSON.parse(JSON.stringify(response)),
+      projects: JSON.parse(JSON.stringify(mockProjects)),
     },
     revalidate: 1,
   };

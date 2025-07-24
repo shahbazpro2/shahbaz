@@ -3,11 +3,12 @@ import { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';
 import { useWindowSize } from 'usehooks-ts';
 
-import HeaderSidebar from './header/HeaderSidebar';
-import HeaderTop from './header/HeaderTop';
 import NowPlayingBar from '@/common/components/elements/NowPlayingBar';
 import NowPlayingCard from '@/common/components/elements/NowPlayingCard';
 import useHasMounted from '@/common/hooks/useHasMounted';
+
+import HeaderSidebar from './header/HeaderSidebar';
+import HeaderTop from './header/HeaderTop';
 
 interface LayoutProps {
   children: React.ReactNode;
