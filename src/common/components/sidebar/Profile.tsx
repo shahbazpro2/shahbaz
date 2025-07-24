@@ -8,7 +8,6 @@ import useIsMobile from '@/common/hooks/useIsMobile';
 import MobileMenu from './MobileMenu';
 import MobileMenuButton from './MobileMenuButton';
 import ProfileHeader from './ProfileHeader';
-import SearchBox from '../elements/SearchBox';
 import ThemeToggleButton from '../elements/ThemeToggleButton';
 
 interface ProfileProps {
@@ -77,7 +76,6 @@ const Profile = ({ isScrolled = false }: ProfileProps) => {
           <AnimatePresence>
             {expandMenu && (
               <div className='space-y-5 pt-6'>
-                <SearchBox />
                 <MobileMenu />
               </div>
             )}

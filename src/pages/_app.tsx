@@ -10,9 +10,7 @@ import 'tailwindcss/tailwind.css';
 import 'aos/dist/aos.css';
 import '@/common/styles/globals.css';
 
-import CommandPalette from '@/common/components/elements/CommandPalette';
 import Layout from '@/common/components/layouts';
-import { CommandPaletteProvider } from '@/common/context/CommandPaletteContext';
 import {
   firaCode,
   jakartaSans,
@@ -50,13 +48,10 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
       <DefaultSeo {...defaultSEOConfig} />
       <SessionProvider session={session}>
         <ThemeProvider attribute='class' defaultTheme='dark'>
-          <CommandPaletteProvider>
-            <Layout>
-              <CommandPalette />
-              <ProgressBar />
-              <Component {...pageProps} />
-            </Layout>
-          </CommandPaletteProvider>
+          <Layout>
+            <ProgressBar />
+            <Component {...pageProps} />
+          </Layout>
         </ThemeProvider>
       </SessionProvider>
     </>

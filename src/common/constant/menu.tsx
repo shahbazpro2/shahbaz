@@ -2,10 +2,10 @@ import { BiRocket as ContactIcon } from 'react-icons/bi';
 import {
   BsEnvelopeAtFill as EmailIcon,
   BsGithub as GithubIcon,
-  BsInstagram as InstagramIcon,
   BsLinkedin as LinkedinIcon,
   BsTwitter as TwitterIcon,
 } from 'react-icons/bs';
+import { SiFiverr as FiverrIcon } from 'react-icons/si';
 import {
   FiCoffee as ProjectIcon,
   FiCpu as DashboardIcon,
@@ -82,7 +82,7 @@ export const MENU_APPS: MenuItemProps[] = [
 export const SOCIAL_MEDIA: MenuItemProps[] = [
   {
     title: 'Email',
-    href: 'mailto:shahbaz.dev@gmail.com',
+    href: 'mailto:shahbaz.pro2@gmail.com',
     icon: <EmailIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
@@ -93,7 +93,7 @@ export const SOCIAL_MEDIA: MenuItemProps[] = [
 
   {
     title: 'Linkedin',
-    href: 'https://www.linkedin.com/in/muhammad-shahbaz/',
+    href: 'https://www.linkedin.com/in/shahbazpro2/',
     icon: <LinkedinIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
@@ -103,7 +103,7 @@ export const SOCIAL_MEDIA: MenuItemProps[] = [
   },
   {
     title: 'Twitter',
-    href: 'https://twitter.com/muhammadshahbaz',
+    href: 'https://twitter.com/shahbazpro2',
     icon: <TwitterIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
@@ -112,35 +112,23 @@ export const SOCIAL_MEDIA: MenuItemProps[] = [
     type: 'Link',
   },
   {
-    title: 'Instagram',
-    href: 'https://instagram.com/muhammadshahbaz',
-    icon: <InstagramIcon size={iconSize} />,
+    title: 'Fiverr',
+    href: 'https://www.fiverr.com/s/6Y8KyvB',
+    icon: <FiverrIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
-    eventName: 'Social: Instagram',
-    className: '!bg-orange-700 border border dark:border-neutral-700',
+    eventName: 'Social: Fiverr',
+    className: '!bg-green-500 border border dark:border-neutral-700',
     type: 'Link',
   },
   {
     title: 'Github',
-    href: 'https://github.com/muhammadshahbaz',
+    href: 'https://github.com/shahbazpro2',
     icon: <GithubIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
     eventName: 'Social: Github',
     className: '!bg-black border border dark:border-neutral-700',
-    type: 'Link',
-  },
-];
-
-export const EXTERNAL_LINKS: MenuItemProps[] = [
-  {
-    title: 'Analytics',
-    href: 'https://analytics.aulianza.com/share/LK5kiRuosw9pORLa/aulianza.id',
-    icon: <AnalyticsIcon size={iconSize} />,
-    isShow: true,
-    isExternal: true,
-    eventName: 'External Link: Analytics',
     type: 'Link',
   },
 ];
