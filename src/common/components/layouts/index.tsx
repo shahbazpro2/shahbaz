@@ -1,21 +1,16 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';
-import { ReactNode } from 'react';
 import { useWindowSize } from 'usehooks-ts';
-
-import useHasMounted from '@/common/hooks/useHasMounted';
-import ChatButton from '@/modules/chat/components/ChatButton';
 
 import HeaderSidebar from './header/HeaderSidebar';
 import HeaderTop from './header/HeaderTop';
-import NowPlayingBar from '../elements/NowPlayingBar';
-import NowPlayingCard from '../elements/NowPlayingCard';
-
-// import TopBar from '../elements/TopBar';
+import NowPlayingBar from '@/common/components/elements/NowPlayingBar';
+import NowPlayingCard from '@/common/components/elements/NowPlayingCard';
+import useHasMounted from '@/common/hooks/useHasMounted';
 
 interface LayoutProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
@@ -30,13 +25,7 @@ const Layout = ({ children }: LayoutProps) => {
   const router = useRouter();
   const pageName = router.pathname.split('/')[1];
 
-  const isFullPageHeader =
-    pageName === 'playground' ||
-    pageName === 'blog' ||
-    router.pathname.startsWith('/blog/') ||
-    router.pathname.startsWith('/learn/');
-
-  const isShowChatButton = pageName !== 'guestbook';
+  const isFullPageHeader = pageName === 'playground';
 
   return (
     <>
@@ -61,7 +50,6 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
         )}
       </div>
-      {isShowChatButton && <ChatButton />}
       {isMobile ? <NowPlayingCard /> : <NowPlayingBar />}
     </>
   );

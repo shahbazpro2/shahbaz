@@ -1,42 +1,42 @@
-const canonicalUrl = 'https://aulianza.id';
-const metaImage = 'https://cloud.aulianza.com/public/images/aulianza-id.png';
+const canonicalUrl = 'https://shahbaz.pro';
+const metaImage = '/images/shahbaz-new.png';
 const metaDescription =
-  'Seasoned Software Engineer especially in Frontend side, with a passion for creating pixel-perfect web experiences';
+  'Passionate Full Stack Developer specializing in JavaScript ecosystem. I work with React, Next.js, Node.js, and Nest.js to create modern, scalable web applications.';
 
 const defaultSEOConfig = {
-  defaultTitle: 'Ryan Aulia - Personal Website',
+  defaultTitle: 'Muhammad Shahbaz - Full Stack Developer',
   description: metaDescription,
   canonical: canonicalUrl,
   openGraph: {
     canonical: canonicalUrl,
-    title: 'Ryan Aulia - Personal Website',
+    title: 'Muhammad Shahbaz - Full Stack Developer',
     description: metaDescription,
     type: 'website',
     images: [
       {
         url: metaImage,
-        alt: 'aulianza.id og-image',
+        alt: 'shahbaz.dev og-image',
         width: 800,
         height: 600,
       },
       {
         url: metaImage,
-        alt: 'aulianza.id og-image',
+        alt: 'shahbaz.dev og-image',
         width: 1200,
         height: 630,
       },
       {
         url: metaImage,
-        alt: 'aulianza.id og-image',
+        alt: 'shahbaz.dev og-image',
         width: 1600,
         height: 900,
       },
     ],
-    site_name: 'aulianza.id',
+    site_name: 'shahbazpro2',
   },
   twitter: {
-    handle: '@handle',
-    site: '@site',
+    handle: '@shahbazpro2',
+    site: '@shahbazpro2',
     cardType: 'summary_large_image',
   },
 };

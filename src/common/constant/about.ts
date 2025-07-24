@@ -3,19 +3,19 @@ export const ABOUT = `
     Hello! Thanks for stopping by my personal website.
 </p>
 <p>
-    I'm Ryan. I've been working in web development for over 10 years, doing both the coding you see on the screen (frontend) and the stuff that happens behind the scenes (backend). I know how to manage projects using methods like Waterfall and Agile. But what really gets me excited is making websites and apps that are easy for everyone to use and look good too!
+    I'm Muhammad Shahbaz. I'm a passionate Full Stack Developer with expertise in modern web technologies. I specialize in JavaScript and its ecosystem, particularly React, Next.js, Node.js, and Nest.js. I love building scalable web applications and creating seamless user experiences.
 </p>
 <p>
-    I'm really into JavaScript and PHP, which are languages used to build websites. I also know a bunch of frameworks that make building websites even easier, like React, Vue, Angular, Node.js, and PHP frameworks like Codeigniter and Laravel. I love learning about new web tools and features.
+    My main programming language is JavaScript, and I work extensively with React for frontend development, Next.js for full-stack applications, Node.js for backend services, and Nest.js for building robust server-side applications. I'm always excited to learn about new technologies and best practices in web development.
 </p>
 <p>
-    In my career, I've led teams to build software for a wide range of companies, from large corporations to innovative startups.
+    I hold a Bachelor of Science in Computer Science (BSCS) degree from Foundation University, which has provided me with a strong foundation in computer science principles and software engineering practices.
 </p>
 <p>
-    I believe that good communication is super important in any job.
+    I believe in writing clean, maintainable code and following best practices to create efficient and scalable solutions.
 </p>
 <p>
-    I'm good at adapting to different situations, working efficiently, and always trying to do my best. My experience has taught me how to solve problems and lead teams, but I'm also happy to work with others to get things done. I'm excited about the chance to work together and make cool stuff!
+    I'm good at adapting to different situations, working efficiently, and always trying to do my best. My experience has taught me how to solve problems and work effectively in teams. I'm excited about the chance to work together and build amazing applications!
 </p>
 <p>
     I'm looking forward to the possibility of working with you!

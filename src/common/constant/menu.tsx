@@ -7,15 +7,12 @@ import {
   BsTwitter as TwitterIcon,
 } from 'react-icons/bs';
 import {
-  FiBookOpen as LearnIcon,
   FiCoffee as ProjectIcon,
   FiCpu as DashboardIcon,
   FiPieChart as AnalyticsIcon,
   FiPocket as HomeIcon,
-  FiRss as BlogIcon,
   FiUser as ProfileIcon,
 } from 'react-icons/fi';
-import { PiChatCircleDotsBold as ChatIcon } from 'react-icons/pi';
 import { SiJavascript } from 'react-icons/si';
 
 import { MenuItemProps } from '../types/menu';
@@ -51,24 +48,6 @@ export const MENU_ITEMS: MenuItemProps[] = [
     type: 'Pages',
   },
   {
-    title: 'Blog',
-    href: '/blog',
-    icon: <BlogIcon size={iconSize} />,
-    isShow: true,
-    isExternal: false,
-    eventName: 'Pages: Blog',
-    type: 'Pages',
-  },
-  {
-    title: 'Learn',
-    href: '/learn',
-    icon: <LearnIcon size={iconSize} />,
-    isShow: true,
-    isExternal: false,
-    eventName: 'Pages: Learn',
-    type: 'Pages',
-  },
-  {
     title: 'About',
     href: '/about',
     icon: <ProfileIcon size={iconSize} />,
@@ -84,15 +63,6 @@ export const MENU_ITEMS: MenuItemProps[] = [
     isShow: true,
     isExternal: false,
     eventName: 'Pages: Contact',
-    type: 'Pages',
-  },
-  {
-    title: 'Guestbook',
-    href: '/guestbook',
-    icon: <ChatIcon size={iconSize} />,
-    isShow: true,
-    isExternal: false,
-    eventName: 'Pages: Chat',
     type: 'Pages',
   },
 ];
@@ -112,7 +82,7 @@ export const MENU_APPS: MenuItemProps[] = [
 export const SOCIAL_MEDIA: MenuItemProps[] = [
   {
     title: 'Email',
-    href: 'mailto:aulianza.dev@gmail.com',
+    href: 'mailto:shahbaz.dev@gmail.com',
     icon: <EmailIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
@@ -123,7 +93,7 @@ export const SOCIAL_MEDIA: MenuItemProps[] = [
 
   {
     title: 'Linkedin',
-    href: 'https://www.linkedin.com/in/aulianza/',
+    href: 'https://www.linkedin.com/in/muhammad-shahbaz/',
     icon: <LinkedinIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
@@ -133,7 +103,7 @@ export const SOCIAL_MEDIA: MenuItemProps[] = [
   },
   {
     title: 'Twitter',
-    href: 'https://twitter.com/aulianzaa',
+    href: 'https://twitter.com/muhammadshahbaz',
     icon: <TwitterIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
@@ -143,7 +113,7 @@ export const SOCIAL_MEDIA: MenuItemProps[] = [
   },
   {
     title: 'Instagram',
-    href: 'https://instagram.com/aulianza',
+    href: 'https://instagram.com/muhammadshahbaz',
     icon: <InstagramIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
@@ -153,7 +123,7 @@ export const SOCIAL_MEDIA: MenuItemProps[] = [
   },
   {
     title: 'Github',
-    href: 'https://github.com/aulianza',
+    href: 'https://github.com/muhammadshahbaz',
     icon: <GithubIcon size={iconSize} />,
     isShow: true,
     isExternal: true,

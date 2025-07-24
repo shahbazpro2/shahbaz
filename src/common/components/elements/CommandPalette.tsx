@@ -8,7 +8,6 @@ import {
   BiSearch as SearchIcon,
   BiSun as LightModeIcon,
 } from 'react-icons/bi';
-import { HiOutlineChat as AiIcon } from 'react-icons/hi';
 import { useDebounce } from 'usehooks-ts';
 
 import {
@@ -19,10 +18,6 @@ import {
 import { CommandPaletteContext } from '@/common/context/CommandPaletteContext';
 import useIsMobile from '@/common/hooks/useIsMobile';
 import { MenuItemProps } from '@/common/types/menu';
-import AiLoading from '@/modules/cmdpallete/components/AiLoading';
-import AiResponses from '@/modules/cmdpallete/components/AiResponses';
-import QueryNotFound from '@/modules/cmdpallete/components/QueryNotFound';
-import { sendMessage } from '@/services/chatgpt';
 
 interface MenuOptionItemProps extends MenuItemProps {
   click?: () => void;
@@ -36,12 +31,7 @@ interface MenuOptionProps {
 
 const CommandPalette = () => {
   const [query, setQuery] = useState('');
-  const [isEmptyState, setEmptyState] = useState(false);
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
-  const [askAssistantClicked, setAskAssistantClicked] = useState(false);
-  const [aiLoading, setAiLoading] = useState(false);
-  const [aiResponse, setAiResponse] = useState('');
-  const [aiFinished, setAiFinished] = useState(false);
 
   const router = useRouter();
   const isMobile = useIsMobile();
@@ -129,25 +119,8 @@ const CommandPalette = () => {
 
   const handleFindGoogle = () => {
     const url =
-      'https://www.google.com/search?q=' + queryDebounce + '&ref=aulianza.id';
+      'https://www.google.com/search?q=' + queryDebounce + '&ref=shahbaz.dev';
     window.open(url, '_blank');
-  };
-
-  const handleAskAiAssistant = async () => {
-    setEmptyState(true);
-    setAskAssistantClicked(true);
-    setAiLoading(true);
-
-    const response = await sendMessage(queryDebounce);
-
-    setAiResponse(response);
-    setAiLoading(false);
-  };
-
-  const handleAiClose = () => {
-    setAskAssistantClicked(false);
-    setAiResponse('');
-    setAiFinished(false);
   };
 
   const isActiveRoute = (href: string) => {
@@ -155,202 +128,157 @@ const CommandPalette = () => {
   };
 
   useEffect(() => {
-    if (query) setEmptyState(false);
-  }, [query]);
+    const interval = setInterval(() => {
+      setPlaceholderIndex((prev) => (prev + 1) % placeholders.length);
+    }, 3000);
 
-  useEffect(() => {
-    if (!isMobile) {
-      const timer = setTimeout(() => {
-        setPlaceholderIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
-      }, 3000);
-
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [placeholderIndex, isMobile]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      setQuery('');
-      setEmptyState(false);
-      handleAiClose();
-    }
-  }, [isOpen]);
+    return () => clearInterval(interval);
+  }, [placeholders.length]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
-        setIsOpen(!isOpen);
-      } else if (event.key === 'Escape') {
+      if (
+        (event.metaKey || event.ctrlKey) &&
+        event.key === 'k' &&
+        !event.shiftKey
+      ) {
+        event.preventDefault();
+        setIsOpen(true);
+      }
+
+      if (event.key === 'Escape') {
         setIsOpen(false);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
 
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, setIsOpen]);
-
-  useEffect(() => {
-    if (aiResponse?.includes('```')) {
-      setAiFinished(true);
-    }
-  }, [aiResponse]);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [setIsOpen]);
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
+        as='div'
+        className='relative z-50'
         onClose={setIsOpen}
-        className='fixed inset-0 z-[999] overflow-y-auto p-4 pt-[25vh]'
+        data-umami-event='Command Palette: Open'
       >
         <Transition.Child
           as={Fragment}
-          enter='transition-opacity duration-200 ease-out'
+          enter='ease-out duration-300'
           enterFrom='opacity-0'
           enterTo='opacity-100'
-          leave='transition-opacity duration-100 ease-in'
+          leave='ease-in duration-200'
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
-          <Dialog.Overlay className='fixed inset-0 bg-neutral-600/90 dark:bg-neutral-900/90' />
+          <div className='fixed inset-0 bg-neutral-900/50 backdrop-blur-sm' />
         </Transition.Child>
 
-        <Dialog.Panel>
+        <div className='fixed inset-0 overflow-y-auto p-4 sm:p-6 md:p-20'>
           <Transition.Child
             as={Fragment}
-            enter='transition-transform duration-200 ease-out'
+            enter='ease-out duration-300'
             enterFrom='opacity-0 scale-95'
             enterTo='opacity-100 scale-100'
-            leave='transition-transform duration-100 ease-in'
-            leaveFrom='opacity-100 scale-100'
+            leave='ease-in duration-200'
+            leaveFrom='opacity-100'
             leaveTo='opacity-0 scale-95'
           >
-            <Combobox
-              onChange={(menu: MenuOptionItemProps) => handleSelect(menu)}
-              as='div'
-              className='shadow-3xl relative mx-auto max-w-xl overflow-hidden rounded-xl border-2 border-neutral-100 bg-white ring-1 ring-black/5 backdrop-blur dark:divide-neutral-600 dark:border-neutral-800 dark:bg-[#1b1b1b80]'
-              disabled={askAssistantClicked}
-            >
-              <div className='flex items-center gap-3 border-b border-neutral-300 px-4 dark:border-neutral-800'>
-                {askAssistantClicked ? (
-                  <AiIcon size={22} />
-                ) : (
-                  <SearchIcon size={22} />
-                )}
-                <Combobox.Input
-                  onChange={handleSearch}
-                  className='h-14 w-full border-0 bg-transparent  text-neutral-800 placeholder-neutral-500 focus:outline-none focus:ring-0 dark:text-neutral-200'
-                  placeholder={
-                    askAssistantClicked ? queryDebounce : placeholder
-                  }
-                />
-              </div>
+            <Dialog.Panel className='mx-auto max-w-2xl transform divide-y divide-neutral-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all dark:divide-neutral-800 dark:bg-neutral-900'>
+              <Combobox onChange={handleSelect}>
+                <div className='relative'>
+                  <SearchIcon
+                    className='pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-neutral-400'
+                    aria-hidden='true'
+                  />
+                  <Combobox.Input
+                    className='h-12 w-full border-0 bg-transparent pl-11 pr-4 text-neutral-900 placeholder-neutral-500 focus:ring-0 dark:text-neutral-100 dark:placeholder-neutral-400 sm:text-sm'
+                    placeholder={placeholder}
+                    onChange={handleSearch}
+                    value={query}
+                  />
+                </div>
 
-              <div
-                className={clsx(
-                  'max-h-80 overflow-y-auto px-1 py-2',
-                  isEmptyState && '!py-0',
+                {queryDebounce && (
+                  <div className='flex flex-wrap items-center gap-2 border-t border-neutral-200 px-4 py-2.5 dark:border-neutral-800'>
+                    <button
+                      onClick={handleFindGoogle}
+                      className='flex items-center gap-2 rounded-lg bg-neutral-100 px-3 py-2 text-sm text-neutral-700 transition-colors hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700'
+                    >
+                      <SearchIcon size={16} />
+                      Search on Google
+                    </button>
+                  </div>
                 )}
-              >
+
                 {filterMenuOptions.map((menu) => (
-                  <div
-                    key={menu.title}
-                    className={clsx(
-                      menu?.children?.length === 0 && 'hidden',
-                      'py-1',
-                    )}
-                  >
-                    <div className='my-2 px-5 text-xs font-medium text-neutral-500'>
-                      {menu?.title}
+                  <div key={menu.title} className='py-2'>
+                    <div className='px-4 py-2 text-xs font-semibold text-neutral-500 dark:text-neutral-400'>
+                      {menu.title}
                     </div>
-                    <Combobox.Options static className='space-y-1'>
-                      {menu?.children?.map((child, index) => (
-                        <Combobox.Option key={index.toString()} value={child}>
-                          {({ active }) => (
-                            <div
-                              className={clsx(
-                                active || isActiveRoute(child?.href)
-                                  ? 'bg-neutral-200 text-neutral-600 dark:bg-neutral-700/60 dark:text-white'
-                                  : 'text-neutral-600 dark:text-neutral-300',
-                                'group mx-2 flex cursor-pointer items-center justify-between gap-3 rounded-md px-4 py-2',
-                                'dark:hover:bg-[#ffffff14]',
-                              )}
-                            >
-                              <div className='flex items-center gap-5'>
-                                {child?.icon && (
-                                  <div
+                    <Combobox.Options
+                      static
+                      className='max-h-96 overflow-y-auto py-1'
+                    >
+                      {menu.children.map((item) => (
+                        <Combobox.Option
+                          key={item.title}
+                          value={item}
+                          className={({ active }) =>
+                            clsx(
+                              'relative cursor-pointer select-none px-4 py-2',
+                              active
+                                ? 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100'
+                                : 'text-neutral-700 dark:text-neutral-300',
+                            )
+                          }
+                        >
+                          {({ selected, active }) => (
+                            <>
+                              <div className='flex items-center gap-3'>
+                                <div className='flex items-center gap-2'>
+                                  {item.icon}
+                                  <span
                                     className={clsx(
-                                      'transition-all duration-300 group-hover:-rotate-12',
-                                      isActiveRoute(child?.href) &&
-                                        '-rotate-12',
+                                      'truncate',
+                                      selected && 'font-semibold',
                                     )}
                                   >
-                                    {child?.icon}
+                                    {item.title}
+                                  </span>
+                                </div>
+                                {isActiveRoute(item.href) && (
+                                  <div className='ml-auto flex items-center gap-1'>
+                                    <div className='h-1.5 w-1.5 rounded-full bg-neutral-400 dark:bg-neutral-500' />
                                   </div>
                                 )}
-                                <span className=''>
-                                  {child?.title} {active}
-                                </span>
                               </div>
-                              <>
-                                {isActiveRoute(child?.href) ? (
-                                  <span className='animate-pulse  text-xs text-neutral-500'>
-                                    You are here
-                                  </span>
-                                ) : (
-                                  <>
-                                    {child?.type && (
-                                      <div className='rounded-md border border-neutral-400 px-1.5 py-0.5  text-xs text-neutral-500 dark:border-neutral-500'>
-                                        {child?.type}
-                                      </div>
-                                    )}
-                                  </>
-                                )}
-                              </>
-                            </div>
+                            </>
                           )}
                         </Combobox.Option>
                       ))}
                     </Combobox.Options>
                   </div>
                 ))}
-              </div>
 
-              {!isEmptyState &&
-                !askAssistantClicked &&
-                queryDebounce &&
-                filterMenuOptions.every(
-                  (item) => item.children.length === 0,
-                ) && (
-                  <QueryNotFound
-                    query={queryDebounce}
-                    onAskAiAssistant={handleAskAiAssistant}
-                    onFindGoogle={handleFindGoogle}
-                  />
-                )}
-
-              {askAssistantClicked &&
-                queryDebounce &&
-                filterMenuOptions.every(
-                  (item) => item.children.length === 0,
-                ) && (
-                  <div className='max-h-80 overflow-y-auto px-8 py-7 text-neutral-700 dark:text-neutral-300'>
-                    {aiLoading ? (
-                      <AiLoading />
-                    ) : (
-                      <AiResponses
-                        response={aiResponse}
-                        isAiFinished={aiFinished}
-                        onAiFinished={() => setAiFinished(true)}
-                        onAiClose={handleAiClose}
-                      />
-                    )}
-                  </div>
-                )}
-            </Combobox>
+                {queryDebounce &&
+                  filterMenuOptions.every(
+                    (menu) => menu.children.length === 0,
+                  ) && (
+                    <div className='px-4 py-14 text-center text-sm text-neutral-500 dark:text-neutral-400'>
+                      <SearchIcon className='mx-auto h-6 w-6 text-neutral-400 dark:text-neutral-500' />
+                      <p className='mt-4'>No results found.</p>
+                      <p className='mt-2'>Try searching for something else.</p>
+                    </div>
+                  )}
+              </Combobox>
+            </Dialog.Panel>
           </Transition.Child>
-        </Dialog.Panel>
+        </div>
       </Dialog>
     </Transition.Root>
   );
