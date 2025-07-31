@@ -5,6 +5,7 @@ import { SessionProvider } from 'next-auth/react';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'next-themes';
 import { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 import 'tailwindcss/tailwind.css';
 import 'aos/dist/aos.css';
@@ -52,6 +53,30 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
             <ProgressBar />
             <Component {...pageProps} />
           </Layout>
+          <Toaster
+            position='top-right'
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: 'var(--color-neutral-800)',
+                color: 'var(--color-neutral-100)',
+              },
+              success: {
+                duration: 4000,
+                iconTheme: {
+                  primary: '#10b981',
+                  secondary: '#ffffff',
+                },
+              },
+              error: {
+                duration: 4000,
+                iconTheme: {
+                  primary: '#ef4444',
+                  secondary: '#ffffff',
+                },
+              },
+            }}
+          />
         </ThemeProvider>
       </SessionProvider>
     </>

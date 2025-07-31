@@ -1,7 +1,8 @@
-import axios from 'axios';
+import emailjs from '@emailjs/browser';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { FiClock as ClockIcon } from 'react-icons/fi';
+import toast from 'react-hot-toast';
 
 import Button from '@/common/components/elements/Button';
 
@@ -45,17 +46,32 @@ const ContactForm = () => {
     if (!hasErrors) {
       setIsLoading(true);
       try {
-        const response = await axios.post('/api/contact', { formData });
+        // Initialize EmailJS with your public key
+        emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '');
+
+        const templateParams = {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        };
+
+        const response = await emailjs.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
+          templateParams,
+        );
+
         if (response.status === 200) {
-          alert('Message sent!');
+          toast.success('Message sent successfully!');
           setFormData(formInitialState);
         }
       } catch (error) {
-        alert(error);
+        console.error('EmailJS Error:', error);
+        toast.error('Failed to send message. Please try again.');
       }
       setIsLoading(false);
     } else {
-      alert('Error!');
+      toast.error('Please fill in all required fields!');
     }
   };
 
