@@ -40,6 +40,7 @@ export const STACKS = {
   JavaScript: <SiJavascript size={iconSize} className='text-yellow-500' />,
   TypeScript: <SiTypescript size={iconSize} className='text-blue-500' />,
   React: <SiReact size={iconSize} className='text-blue-500' />,
+  'React js': <SiReact size={iconSize} className='text-blue-500' />,
   Vue: <SiVuedotjs size={iconSize} className='text-green-500' />,
   Angular: <SiAngular size={iconSize} className='text-red-500' />,
   Node: <SiNodedotjs size={iconSize} className='text-green-500' />,
@@ -63,7 +64,21 @@ export const STACKS = {
   CSS: <SiCss3 size={iconSize} className='text-blue-500' />,
   SASS: <SiSass size={iconSize} className='text-pink-500' />,
   TailwindCSS: <SiTailwindcss size={iconSize} className='text-blue-500' />,
+  Tailwindcss: <SiTailwindcss size={iconSize} className='text-blue-500' />,
   Bootstrap: <SiBootstrap size={iconSize} className='text-purple-500' />,
   ChakraUI: <SiChakraui size={iconSize} className='text-teal-500' />,
   Figma: <SiFigma size={iconSize} className='text-pink-500' />,
+  Wagmi: (
+    <img
+      src='https://wagmi.sh/logo-dark.svg'
+      alt='Wagmi'
+      className='h-10 w-10'
+    />
+  ),
+  Vite: (
+    <img src='https://vitejs.dev/logo.svg' alt='Vite' className='h-5 w-5' />
+  ),
+  'CoinGecko API': (
+    <img src='/images/coingecko.avif' alt='Coingoko api' className='h-3 w-14' />
+  ),
 };

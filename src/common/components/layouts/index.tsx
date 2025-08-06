@@ -51,7 +51,7 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
         )}
       </div>
-      {isMobile ? <NowPlayingCard /> : <NowPlayingBar />}
+      {/*  {isMobile ? <NowPlayingCard /> : <NowPlayingBar />} */}
     </>
   );
 };

@@ -1,15 +1,38 @@
 export interface ProjectItemProps {
   title: string;
   slug: string;
-  description: string;
-  image: string;
-  link_demo?: string;
-  link_github?: string;
-  stacks: string;
+  excerpt: string;
+  featuredImage: {
+    thumbnailURL: string;
+    url: string;
+  };
+  projectUrl?: string;
+  githubUrl?: string;
+  category?: string;
+  technologies: [
+    {
+      technology: string;
+      id: string;
+    },
+  ];
+  tags: [
+    {
+      name: string;
+      id: string;
+    },
+  ];
   content?: string;
-  is_show: boolean;
-  is_featured: boolean;
-  updated_at: Date;
+  featured: boolean;
+  updatedAt: Date;
+  gallery: [
+    {
+      image: {
+        thumbnailURL: string;
+        url: string;
+      };
+      id: string;
+    },
+  ];
 }
 
 export interface ProjectsProps {

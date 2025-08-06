@@ -7,21 +7,21 @@ import Image from '@/common/components/elements/Image';
 import Tooltip from '@/common/components/elements/Tooltip';
 import { STACKS } from '@/common/constant/stacks';
 import { ProjectItemProps } from '@/common/types/projects';
+import { imageBaseUrl } from '@/services/image';
 
 const ProjectCard = ({
   title,
   slug,
-  description,
-  image,
-  stacks,
-  is_featured,
+  excerpt,
+  featuredImage,
+  technologies,
+  category,
+  featured,
 }: ProjectItemProps) => {
-  const stacksArray = JSON.parse(stacks);
-
   return (
     <Link href={`/projects/${slug}`}>
       <Card className='group relative cursor-pointer border border-neutral-200 dark:border-neutral-900 lg:hover:scale-[102%]'>
-        {is_featured && (
+        {featured && (
           <div className='absolute right-0 top-0 z-[2] flex items-center gap-1 rounded-bl-xl rounded-tr-xl bg-lime-300 px-2 py-1 text-[13px] font-medium text-emerald-950'>
             <PinIcon size={15} />
             <span>Featured</span>
@@ -29,7 +29,7 @@ const ProjectCard = ({
         )}
         <div className='relative'>
           <Image
-            src={image}
+            src={`${imageBaseUrl}${featuredImage.url}`}
             width={400}
             height={200}
             alt={title}
@@ -46,19 +46,41 @@ const ProjectCard = ({
               {title}
             </div>
           </div>
+          {category && (
+            <div className='flex items-center gap-2'>
+              <span className='rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200'>
+                {category}
+              </span>
+            </div>
+          )}
           <p className='text-[15px] leading-relaxed text-neutral-700 dark:text-neutral-400'>
-            {description}
+            {excerpt}
           </p>
           <div className='flex flex-wrap items-center gap-3 pt-2'>
-            {stacksArray?.map((stack: string, index: number) => (
-              <div key={index}>
-                {STACKS[stack as keyof typeof STACKS] && (
-                  <Tooltip title={stack}>
-                    {STACKS[stack as keyof typeof STACKS]}
-                  </Tooltip>
-                )}
-              </div>
-            ))}
+            {technologies?.map(
+              (stack: { technology: string }, index: number) => (
+                <div key={index}>
+                  {STACKS[
+                    (stack.technology?.charAt(0).toUpperCase() +
+                      stack.technology?.slice(1)) as keyof typeof STACKS
+                  ] && (
+                    <Tooltip
+                      title={
+                        stack.technology?.charAt(0).toUpperCase() +
+                        stack.technology?.slice(1)
+                      }
+                    >
+                      {
+                        STACKS[
+                          (stack.technology?.charAt(0).toUpperCase() +
+                            stack.technology?.slice(1)) as keyof typeof STACKS
+                        ]
+                      }
+                    </Tooltip>
+                  )}
+                </div>
+              ),
+            )}
           </div>
         </div>
       </Card>
