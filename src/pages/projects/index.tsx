@@ -1,4 +1,4 @@
-import { getAllProjectsApi } from 'api/projects';
+import { getAllProjectsApi } from 'api/projects-client';
 import { GetStaticProps, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';

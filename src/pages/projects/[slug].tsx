@@ -1,4 +1,4 @@
-import { getProjectApi } from 'api/projects';
+import { getProjectApi } from 'api/projects-client';
 import { GetServerSideProps, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 
