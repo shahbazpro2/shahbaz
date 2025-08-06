@@ -1,10 +1,10 @@
 import Image from '@/common/components/elements/Image';
 import Tooltip from '@/common/components/elements/Tooltip';
+import RenderContent from '@/common/components/RenderContent';
 import { STACKS } from '@/common/constant/stacks';
 import { ProjectItemProps } from '@/common/types/projects';
-
-import RenderContent from '@/common/components/RenderContent';
 import { imageBaseUrl } from '@/services/image';
+
 import ProjectGallery from './ProjectGallery';
 import ProjectLink from './ProjectLink';
 

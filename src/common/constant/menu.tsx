@@ -5,14 +5,13 @@ import {
   BsLinkedin as LinkedinIcon,
   BsTwitter as TwitterIcon,
 } from 'react-icons/bs';
-import { SiFiverr as FiverrIcon } from 'react-icons/si';
 import {
   FiCoffee as ProjectIcon,
   FiCpu as DashboardIcon,
-  FiPieChart as AnalyticsIcon,
   FiPocket as HomeIcon,
   FiUser as ProfileIcon,
 } from 'react-icons/fi';
+import { SiFiverr as FiverrIcon } from 'react-icons/si';
 import { SiJavascript } from 'react-icons/si';
 
 import { MenuItemProps } from '../types/menu';

@@ -1,8 +1,8 @@
 import emailjs from '@emailjs/browser';
 import clsx from 'clsx';
 import { useState } from 'react';
-import { FiClock as ClockIcon } from 'react-icons/fi';
 import toast from 'react-hot-toast';
+import { FiClock as ClockIcon } from 'react-icons/fi';
 
 import Button from '@/common/components/elements/Button';
 

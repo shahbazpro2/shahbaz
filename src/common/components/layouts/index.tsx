@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';
 import { useWindowSize } from 'usehooks-ts';
 
-import NowPlayingBar from '@/common/components/elements/NowPlayingBar';
-import NowPlayingCard from '@/common/components/elements/NowPlayingCard';
 import useHasMounted from '@/common/hooks/useHasMounted';
 
 import HeaderSidebar from './header/HeaderSidebar';

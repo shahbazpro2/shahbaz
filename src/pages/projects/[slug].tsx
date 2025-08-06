@@ -1,7 +1,6 @@
+import { getProjectApi } from 'api/projects';
 import { GetServerSideProps, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-
-import { getProjectApi } from 'api/projects';
 
 import BackButton from '@/common/components/elements/BackButton';
 import Container from '@/common/components/elements/Container';
@@ -54,86 +53,22 @@ const ProjectsDetailPage: NextPage<ProjectsDetailPageProps> = ({ project }) => {
 export default ProjectsDetailPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  try {
-    // Fetch project from API
-    const response = await getProjectApi(String(params?.slug))();
-    const project = response?.data?.docs?.[0] || null;
+  // Fetch project from API
+  const response = await getProjectApi(String(params?.slug))();
+  const project = response?.data?.docs?.[0] || null;
 
-    if (!project) {
-      return {
-        redirect: {
-          destination: '/404',
-          permanent: false,
-        },
-      };
-    }
-
+  if (!project) {
     return {
-      props: {
-        project: JSON.parse(JSON.stringify(project)),
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching project:', error);
-
-    // Fallback to mock data if API fails
-    const mockProject = {
-      id: 1,
-      title: 'Sample Project',
-      slug: 'sample-project',
-      description: 'This is a sample project for demonstration purposes.',
-      image: '/images/placeholder.png',
-      link_demo: 'https://example.com',
-      link_github: 'https://github.com/example',
-      stacks: '["React", "TypeScript", "Next.js"]',
-      is_show: true,
-      updated_at: new Date().toISOString(),
-      content: 'This is sample content for the project.',
-      is_featured: true,
-    };
-
-    // Check if the requested slug matches our mock data
-    if (params?.slug !== 'sample-project') {
-      return {
-        redirect: {
-          destination: '/404',
-          permanent: false,
-        },
-      };
-    }
-
-    return {
-      props: {
-        project: JSON.parse(JSON.stringify(mockProject)),
+      redirect: {
+        destination: '/404',
+        permanent: false,
       },
     };
   }
+
+  return {
+    props: {
+      project: JSON.parse(JSON.stringify(project)),
+    },
+  };
 };
-
-// RY: moved from SSG to SSR since data updated frequently from DB
-// export const getStaticProps: GetStaticProps = async ({ params }) => {
-//   const response = await prisma.projects.findUnique({
-//     where: {
-//       slug: String(params?.slug),
-//     },
-//   });
-
-//   return {
-//     props: {
-//       project: JSON.parse(JSON.stringify(response)),
-//     },
-//     revalidate: 10,
-//   };
-// };
-
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   const response = await prisma.projects.findMany();
-//   const paths = response.map((project) => ({
-//     params: { slug: project.slug },
-//   }));
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
