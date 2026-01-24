@@ -66,13 +66,15 @@ const ProjectDetail = ({
           link_github={githubUrl || ''}
         />
       </div>
-      <Image
-        src={`${imageBaseUrl}${featuredImage.url}`}
-        width={800}
-        height={400}
-        alt={title}
-        className='hover:scale-105'
-      />
+      {featuredImage?.url && (
+        <Image
+          src={`${imageBaseUrl}${featuredImage.url}`}
+          width={800}
+          height={400}
+          alt={title}
+          className='hover:scale-105'
+        />
+      )}
       {content && (
         <div className='mt-5 space-y-6 leading-[1.8] dark:text-neutral-300'>
           <RenderContent data={content} className='prose' />

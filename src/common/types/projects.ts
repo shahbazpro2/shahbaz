@@ -2,7 +2,7 @@ export interface ProjectItemProps {
   title: string;
   slug: string;
   excerpt: string;
-  featuredImage: {
+  featuredImage?: {
     thumbnailURL: string;
     url: string;
   };

@@ -29,7 +29,7 @@ const ProjectCard = ({
         )}
         <div className='relative'>
           <Image
-            src={`${imageBaseUrl}${featuredImage.url}`}
+            src={`${imageBaseUrl}${featuredImage?.url || ''}`}
             width={400}
             height={200}
             alt={title}

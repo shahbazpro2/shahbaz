@@ -33,11 +33,13 @@ const ProjectsDetailPage: NextPage<ProjectsDetailPageProps> = ({ project }) => {
             authors: ['Muhammad Shahbaz'],
           },
           url: canonicalUrl,
-          images: [
-            {
-              url: `${imageBaseUrl}${project?.featuredImage.thumbnailURL}`,
-            },
-          ],
+          images: project?.featuredImage?.thumbnailURL
+            ? [
+                {
+                  url: `${imageBaseUrl}${project.featuredImage.thumbnailURL}`,
+                },
+              ]
+            : [],
           siteName: 'Blog Muhammad Shahbaz',
         }}
       />
