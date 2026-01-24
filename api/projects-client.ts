@@ -6,6 +6,7 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 export const getAllProjectsApi = (page: number) => {
   const query = stringify({
     page: page,
+    status: 'published',
   });
   return responseApi(`${baseUrl}/projects?${query}`, 'get');
 };
