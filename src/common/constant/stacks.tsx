@@ -1,3 +1,4 @@
+import { Key, Link2, Shield } from 'lucide-react';
 import {
   SiAngular,
   SiBootstrap,
@@ -25,6 +26,7 @@ import {
   SiReact,
   SiRedux,
   SiSass,
+  SiStripe,
   SiSupabase,
   SiTailwindcss,
   SiTypescript,
@@ -98,4 +100,8 @@ export const STACKS = {
   'CoinGecko API': (
     <img src='/images/coingecko.avif' alt='Coingoko api' className='h-3 w-14' />
   ),
+  Stripe: <SiStripe size={iconSize} className='text-indigo-500' />,
+  OAuth: <Shield size={iconSize} className='text-orange-500' />,
+  'JWT Authentication': <Key size={iconSize} className='text-orange-500' />,
+  'RESTful APIs': <Link2 size={iconSize} className='text-blue-500' />,
 };
