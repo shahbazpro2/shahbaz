@@ -1,7 +1,7 @@
 import { differenceInMonths, differenceInYears, format } from 'date-fns';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { BsBuildings as CompanyIcon } from 'react-icons/bs';
+import { BsBuildings as CompanyIcon, BsBoxArrowUpRight } from 'react-icons/bs';
 import { HiChevronRight } from 'react-icons/hi';
 
 import Card from '@/common/components/elements/Card';
@@ -48,15 +48,34 @@ const CareerCard = ({
     <Card className='flex gap-5 border border-neutral-300 px-6 py-4 dark:border-neutral-900'>
       <div className='mt-1.5 w-fit'>
         {logo ? (
-          <Image
-            src={logo}
-            width={55}
-            height={55}
-            alt={company}
-            className='h-14 w-14 rounded bg-neutral-50 p-1 hover:scale-110 hover:bg-transparent'
-          />
+          <a
+            href={link || '#'}
+            target='_blank'
+            rel='noopener noreferrer'
+            data-umami-event={`Click Career Company Logo: ${company}`}
+            className='block'
+          >
+            <Image
+              src={logo}
+              width={55}
+              height={55}
+              alt={company}
+              className='h-14 w-14 cursor-pointer rounded bg-neutral-50 p-1 transition-transform hover:scale-110 hover:bg-transparent'
+            />
+          </a>
         ) : (
-          <CompanyIcon size={50} />
+          <a
+            href={link || '#'}
+            target='_blank'
+            rel='noopener noreferrer'
+            data-umami-event={`Click Career Company Logo: ${company}`}
+            className='block'
+          >
+            <CompanyIcon
+              size={50}
+              className='cursor-pointer transition-transform hover:scale-110'
+            />
+          </a>
         )}
       </div>
       <div className='w-4/5 space-y-3'>
@@ -67,11 +86,19 @@ const CareerCard = ({
               <a
                 href={link || '#'}
                 target='_blank'
+                rel='noopener noreferrer'
                 data-umami-event={`Click Career Company Name: ${company}`}
+                className='group inline-flex items-center gap-1.5'
               >
                 <span className='cursor-pointer underline-offset-2 hover:text-dark hover:underline hover:dark:text-white'>
                   {company}
                 </span>
+                {link && link !== '#' && (
+                  <BsBoxArrowUpRight
+                    size={14}
+                    className='text-neutral-400 transition-colors group-hover:text-dark group-hover:dark:text-white'
+                  />
+                )}
               </a>
               <span className='hidden text-neutral-300 dark:text-neutral-700 lg:block'>
                 •

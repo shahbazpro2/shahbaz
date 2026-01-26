@@ -12,7 +12,6 @@ import {
   FiUser as ProfileIcon,
 } from 'react-icons/fi';
 import { SiFiverr as FiverrIcon } from 'react-icons/si';
-import { SiJavascript } from 'react-icons/si';
 
 import { MenuItemProps } from '../types/menu';
 
@@ -62,18 +61,6 @@ export const MENU_ITEMS: MenuItemProps[] = [
     isShow: true,
     isExternal: false,
     eventName: 'Pages: Contact',
-    type: 'Pages',
-  },
-];
-
-export const MENU_APPS: MenuItemProps[] = [
-  {
-    title: 'JS Playground',
-    href: '/playground',
-    icon: <SiJavascript size={iconSize} />,
-    isShow: true,
-    isExternal: false,
-    eventName: 'Pages: Playground',
     type: 'Pages',
   },
 ];
